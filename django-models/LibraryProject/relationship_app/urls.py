@@ -26,3 +26,11 @@ from .views import admin_view
 urlpatterns = [
     path('admin-role/', admin_view, name='admin_view'),
 ]
+
+
+from django.urls import path
+from .views import librarian_view
+
+urlpatterns = [
+    path('librarian-role/', librarian_view, name='librarian_view'),
+]

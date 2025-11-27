@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm   
 from django.shortcuts import render
-from django.contrib.auth.decorators import 
+from django.contrib.auth.decorators import permission_required
 from .models import Book
 from .forms import Bookform 
 
@@ -87,6 +87,7 @@ def member_view(request):
 
 
 
+# Add book view
 # Add book view
 @permission_required('relationship_app.can_add_book')
 def add_book(request):

@@ -53,6 +53,9 @@ def register_view(request):
 def is_admin(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
+def admin_view(request):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
 def is_librarian(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
 

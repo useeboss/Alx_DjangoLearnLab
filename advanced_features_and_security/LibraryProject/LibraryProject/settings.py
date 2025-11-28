@@ -113,3 +113,5 @@ SECURE_CONTENT_TYPE_NOSNIFF = True      # Prevent MIME type sniffing
 SECURE_BROWSER_XSS_FILTER = True        # Enable browser XSS protection
 
 
+# ✅ Trust the X-Forwarded-Proto header from your proxy
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from .models import Book
 from .forms import SearchForm
+from .forms import ExampleForm
+
 
 
 @permission_required("bookshelf.can_view", raise_exception=True)
@@ -36,3 +38,18 @@ def book_search(request):
         # ✅ Safe ORM query (no string concatenation)
         results = Book.objects.filter(title__icontains=query)
     return render(request, "bookshelf/book_list.html", {"form": form, "results": results})
+
+
+
+def example_form_view(request):
+    if request.method == "POST":
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process the data safely
+            title = form.cleaned_data["title"]
+            author = form.cleaned_data["author"]
+            published_date = form.cleaned_data.get("published_date")
+            # Save or use the data here
+    else:
+        form = ExampleForm()
+    return render(request, "bookshelf/form_example.html", {"form": form})

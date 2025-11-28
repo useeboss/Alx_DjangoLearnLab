@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "bookshelf",
 
     #MyApp
     'LibraryProject.relationship_app'
@@ -130,3 +131,35 @@ AUTH_USER_MODEL = "advanced_features_and_security.CustomUser"
 
 AUTH_USER_MODEL = "bookshelf.CustomUser"
 
+
+# SECURITY SETTINGS
+
+DEBUG = False   # ✅ Never use True in production
+
+# Browser-side protections
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Cookies must only be sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Enforce HTTPS redirects
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+
+INSTALLED_APPS += ["csp"]
+
+MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
+
+# Example CSP policy
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "cdn.jsdelivr.net")
+CSP_STYLE_SRC = ("'self'", "fonts.googleapis.com")
+CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")

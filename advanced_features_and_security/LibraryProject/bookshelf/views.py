@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
+from .models import Book
+from .forms import SearchForm
+
 
 @permission_required("bookshelf.can_view", raise_exception=True)
 def book_list(request):
@@ -22,3 +25,14 @@ def book_edit(request, pk):
 def book_delete(request, pk):
     # Only users with can_delete can access
     pass
+
+
+
+def book_search(request):
+    form = SearchForm(request.GET or None)
+    results = []
+    if form.is_valid():
+        query = form.cleaned_data["query"]
+        # ✅ Safe ORM query (no string concatenation)
+        results = Book.objects.filter(title__icontains=query)
+    return render(request, "bookshelf/book_list.html", {"form": form, "results": results})

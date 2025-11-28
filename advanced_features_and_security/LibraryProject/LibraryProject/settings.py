@@ -78,3 +78,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ✅ Custom User Model
 AUTH_USER_MODEL = "bookshelf.CustomUser"
+
+# SECURITY CONFIGURATIONS
+
+# Prevent cross-site scripting (XSS) attacks
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevent clickjacking by disallowing your site in iframes
+X_FRAME_OPTIONS = "DENY"
+
+# Prevent browsers from guessing content types (MIME sniffing)
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Ensure cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
